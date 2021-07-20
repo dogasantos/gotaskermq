@@ -23,7 +23,8 @@ func runTcpScan(targetip string) {
 	// Parse the command line flags and read config files
 	//options := runner.ParseOptions()
 	var options runner.Options
-	options.Silent = true
+	options.Silent = false
+	options.Debug = true
 	options.Ping = false
 	options.ExcludeCDN = true
 	options.Rate = 2000
