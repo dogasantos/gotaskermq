@@ -59,6 +59,8 @@ func parseOutput(conteudo []byte) []string{
 	log.Printf("=================")
 	for _,item := range linhas {
 		port := strings.Split(item, ":")
+		log.Printf("len: %s",len(port))
+		
 		if len(port) > 0 {
 			log.Printf("%s",port[1])
 		}
