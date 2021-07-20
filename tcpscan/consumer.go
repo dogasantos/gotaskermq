@@ -143,9 +143,12 @@ func main() {
 			} else {
 				log.Printf("Acknowledged message!")
 				log.Printf("Found: ")
+				log.Printf("%s",resultado)
+				/*
 				for _, item := range resultado {
 					log.Printf("\t%s",item)
 				}
+				*/
 
 			}
 
