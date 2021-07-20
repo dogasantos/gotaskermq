@@ -19,9 +19,6 @@ func handleError(err error, msg string) {
 }
 
 func runTcpScan(targetip string) {
-
-	// Parse the command line flags and read config files
-	//options := runner.ParseOptions()
 	var options runner.Options
 	//options.Silent = true
 	options.Debug = true
@@ -34,12 +31,11 @@ func runTcpScan(targetip string) {
 	options.Host = targetip
 	options.Interface = "enp1s0"
 	options.InterfacesList = false
-	//options.Ports = "21-100,106,110-199,389,427,443,444,445,465,513,514,515,543-548,554,587,631,646,873,990-995,1025-1029,1110,1433,1720,1723,1755,1900,2000,2001,2049,2121,2717,3000,3128,3306,3389,3986,4899,5000,5009,5051-5090,5101,5190,5357,5432,5631,5666,5800,5900,6000,6001,6646,7070,8000,8008,8009,8080-8090,8440-8450,8888,9100,9999,10000,32768,49152,49153,49154,49155,49156,49157"
 	options.TopPorts = "100"
 	options.Threads = 10
-	options.Nmap = false
-	options.Output = "/tmp/nmap-output.xml"
-	//options.NmapCLI = "nmap -sV -oX /tmp/nmap-output.xml --script=http-title,http-server-header,http-open-proxy,http-methods,http-headers,ssl-cert"
+	options.Nmap = true
+	//options.Output = "/tmp/naabu-output.txt"
+	options.NmapCLI = "nmap -sV -oX /tmp/nmap-output.xml --script=http-title,http-server-header,http-open-proxy,http-methods,http-headers,ssl-cert"
 
 	naabuRunner, err := runner.NewRunner(&options)
 	if err != nil {
@@ -49,6 +45,7 @@ func runTcpScan(targetip string) {
 	if err != nil {
 		gologger.Fatal().Msgf("Could not run enumeration: %s\n", err)
 	}
+
 }
 
 
