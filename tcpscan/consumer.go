@@ -62,7 +62,7 @@ func checkScanResults() []string{
 	fc, err := ioutil.ReadFile(noutput)
 	handleError(err,"Can't read /tmp/naabu-output.txt")
 	
-	os.Remove(noutput)
+	//os.Remove(noutput)
 
 	for _, item := range fc {
 		results = append(results, string(item))
