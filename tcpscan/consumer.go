@@ -21,8 +21,11 @@ func handleError(err error, msg string) {
 func runTcpScan(targetip string) {
 	var options runner.Options
 	//options.Silent = true
+	options.Verbose = true  
 	options.Debug = true
 	options.Ping = false
+	options.EnableProgressBar = true
+	options.ScanType = "s"
 	options.ExcludeCDN = true
 	options.Rate = 200
 	options.Timeout = 8
