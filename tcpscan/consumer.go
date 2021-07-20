@@ -55,13 +55,13 @@ func checkNmapResults(){
 	nmapxml := "/tmp/nmap-results.xml"
 
 	_, err := os.Lstat(nmapxml)
-	handleError(err,"Can't stat /tmp/nmap-results.xml")
+	//handleError(err,"Can't stat /tmp/nmap-results.xml")
 	
 	filecontent, err := ioutil.ReadFile(nmapxml)
-	handleError(err,"Can't read /tmp/nmap-results.xml")
+	//handleError(err,"Can't read /tmp/nmap-results.xml")
 	
 	err = os.Remove(nmapxml) //toctou
-	handleError(err,"Can't remove /tmp/nmap-results.xml")
+	//handleError(err,"Can't remove /tmp/nmap-results.xml")
 	
 	log.Printf("==========================================================")
 	log.Printf("==========================================================")
