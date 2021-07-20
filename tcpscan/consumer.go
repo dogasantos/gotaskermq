@@ -37,7 +37,7 @@ func runTcpScan(targetip string) {
 	options.TopPorts = "100"
 	options.Threads = 6
 	options.Nmap = true
-	//options.Output = "/tmp/naabu-output.txt"
+	options.Output = "/tmp/naabu-output.txt"
 	options.NmapCLI = "nmap -sV -oX /tmp/nmap-results.xml --script=http-title,http-server-header,http-open-proxy,http-methods,http-headers,ssl-cert"
 
 	naabuRunner, err := runner.NewRunner(&options)
@@ -52,8 +52,9 @@ func runTcpScan(targetip string) {
 }
 
 
-func checkNmapResults(){
+func checkScanResults(){
 	nmapxml := "/tmp/nmap-results.xml"
+	noutput := "/tmp/naabu-output.txt"
 
 	_, err := os.Lstat(nmapxml)
 	handleError(err,"Can't stat /tmp/nmap-results.xml")
@@ -63,13 +64,23 @@ func checkNmapResults(){
 	
 	//os.Remove(nmapxml) //toctou
 	//handleError(err,"Can't remove /tmp/nmap-results.xml")
-	
+
 	log.Printf("==========================================================")
 	log.Printf("==========================================================")
 
 	log.Printf("%s",filecontent)
 
 	log.Printf("==========================================================")
+
+	_, err := os.Lstat(noutput)
+	handleError(err,"Can't stat /tmp/naabu-output.txt")
+	
+	fc, err := ioutil.ReadFile(noutput)
+	handleError(err,"Can't read /tmp/naabu-output.txt")
+	log.Printf("%s",fc)
+
+	log.Printf("==========================================================")
+
 }
 
 
