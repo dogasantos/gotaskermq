@@ -58,7 +58,7 @@ func checkNmapResults(){
 	filecontent, err := ioutil.ReadFile(nmapxml)
 	handleError(err,"Can't read /tmp/nmap-results.xml")
 	
-	os.Remove(nmapxml) //toctou
+	//os.Remove(nmapxml) //toctou
 	//handleError(err,"Can't remove /tmp/nmap-results.xml")
 	
 	log.Printf("==========================================================")
