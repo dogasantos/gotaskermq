@@ -72,7 +72,7 @@ func checkScanResults(){
 
 	log.Printf("==========================================================")
 
-	_, err := os.Lstat(noutput)
+	_, err = os.Lstat(noutput)
 	handleError(err,"Can't stat /tmp/naabu-output.txt")
 	
 	fc, err := ioutil.ReadFile(noutput)
@@ -147,7 +147,7 @@ func main() {
 			log.Printf("New ipaddr to work with: %s", d.Body)
 
 			 runTcpScan(string(d.Body))
-			 checkNmapResults()
+			 checkScanResults()
 
 			if err := d.Ack(false); err != nil {
 				log.Printf("Error acknowledging message : %s", err)
