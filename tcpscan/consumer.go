@@ -52,35 +52,18 @@ func runTcpScan(targetip string) {
 }
 
 
-func checkScanResults(){
-	//nmapxml := "/tmp/nmap-results.xml"
+func checkScanResults() []string{
 	noutput := "/tmp/naabu-output.txt"
-
-	//_, err := os.Lstat(nmapxml)
-	//handleError(err,"Can't stat /tmp/nmap-results.xml")
-	
-	//filecontent, err := ioutil.ReadFile(nmapxml)
-	//handleError(err,"Can't read /tmp/nmap-results.xml")
-	
-	//os.Remove(nmapxml) //toctou
-	//handleError(err,"Can't remove /tmp/nmap-results.xml")
-
-	//log.Printf("==========================================================")
-	//log.Printf("==========================================================")
-
-	//log.Printf("%s",filecontent)
-
-	log.Printf("==========================================================")
 
 	_, err := os.Lstat(noutput)
 	handleError(err,"Can't stat /tmp/naabu-output.txt")
 	
 	fc, err := ioutil.ReadFile(noutput)
 	handleError(err,"Can't read /tmp/naabu-output.txt")
-	log.Printf("%s",fc)
+	
+	os.Remove(noutput)
 
-	log.Printf("==========================================================")
-
+	return fc
 }
 
 
@@ -147,7 +130,8 @@ func main() {
 			log.Printf("New ipaddr to work with: %s", d.Body)
 
 			 runTcpScan(string(d.Body))
-			 checkScanResults()
+			 resultado := checkScanResults()
+			 log.Printf(resultado)
 
 			if err := d.Ack(false); err != nil {
 				log.Printf("Error acknowledging message : %s", err)
