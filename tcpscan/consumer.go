@@ -59,7 +59,7 @@ func parseOutput(conteudo []byte) {
 	log.Printf(results)
 	log.Printf("=================")
 
-	first := strings.Split(conteudo, "\n")
+	first := strings.Split(string(conteudo), "\n")
 	log.Printf("=================")
 	log.Printf("%s",first)
 	log.Printf("=================")
