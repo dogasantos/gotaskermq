@@ -4,6 +4,7 @@ import (
 	"github.com/streadway/amqp"
 	"log"
 	"os"
+	"io/ioutil"
 
 	_ "github.com/projectdiscovery/fdmax/autofdmax"
 	"github.com/projectdiscovery/gologger"
@@ -33,11 +34,11 @@ func runTcpScan(targetip string) {
 	options.Host = targetip
 	options.Interface = "enp1s0"
 	options.InterfacesList = false
-	//options.TopPorts = "21,22,25,80,81,82,123,135,143,110,443,445,8080,3306,3389"
+	options.TopPorts = "21,22,25,80,81,82,123,135,143,110,443,445,8080,3306,3389"
 	options.TopPorts = "100"
 	options.Threads = 10
-	//options.Nmap = true
-	//options.NmapCLI = "nmap -sV -oX /tmp/nmap-output.xml --script=http-title,http-server-header,http-open-proxy,http-methods,http-headers,ssl-cert"
+	options.Nmap = true
+	options.NmapCLI = "nmap -sV -oX /tmp/nmap-output.xml --script=http-title,http-server-header,http-open-proxy,http-methods,http-headers,ssl-cert"
 
 	naabuRunner, err := runner.NewRunner(&options)
 	if err != nil {
@@ -51,7 +52,24 @@ func runTcpScan(targetip string) {
 
 
 }
+func checkNmapResults(){
+	nmapxml := "/tmp/nmap-results.xml"
 
+	if _, err := os.Stat(nmapxml); err == nil {
+		filecontent, err := ioutil.ReadFile(nmapxml)
+		handleError(err)
+		fileInfo, err := os.Lstat(nmapxml)
+		handleError(err)
+		err := os.Remove(nmapxml) //toctou
+		handleError(err)
+		log.Printf(filecontent)
+
+	  
+	  } else if os.IsNotExist(err) {
+		handleError("Nmap file does not exist")
+	  }
+	  
+}
 
 
 
@@ -118,6 +136,7 @@ func main() {
 			log.Printf("New ipaddr to work with: %s", d.Body)
 
 			 runTcpScan(string(d.Body))
+			 checkNmapResults()
 
 			if err := d.Ack(false); err != nil {
 				log.Printf("Error acknowledging message : %s", err)
