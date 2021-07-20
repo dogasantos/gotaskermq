@@ -131,13 +131,14 @@ func main() {
 
 			runTcpScan(string(d.Body))
 			resultado := checkScanResults()
-			log.Printf(resultado)
+			
 
 			if err := d.Ack(false); err != nil {
 				log.Printf("Error acknowledging message : %s", err)
 			} else {
 				log.Printf("Acknowledged message!")
 				log.Printf("Found: ")
+				log.Printf(resultado)
 
 			}
 
