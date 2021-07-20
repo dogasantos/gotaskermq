@@ -56,11 +56,13 @@ func checkScanResults() []string{
 	var results []string
 	noutput := "/tmp/naabu-output.txt"
 
+	/*
 	_, err := os.Lstat(noutput)
-	handleError(err,"Can't stat /tmp/naabu-output.txt")
+	handleError(err,"Can't stat %s",noutput)
+	*/
 	
 	fc, err := ioutil.ReadFile(noutput)
-	handleError(err,"Can't read /tmp/naabu-output.txt")
+	handleError(err,"Can't read %s",noutput)
 	
 	//os.Remove(noutput)
 
