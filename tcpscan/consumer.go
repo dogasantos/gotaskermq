@@ -23,14 +23,14 @@ func runTcpScan(targetip string) {
 	// Parse the command line flags and read config files
 	//options := runner.ParseOptions()
 	var options runner.Options
-	options.Silent = true
-	//options.Debug = true
+	//options.Silent = true
+	options.Debug = true
 	options.Ping = false
 	options.ExcludeCDN = true
-	options.Rate = 100
+	options.Rate = 10
 	options.Timeout = 6
-	options.Retries = 2
-	options.WarmUpTime = 4
+	options.Retries = 3
+	options.WarmUpTime = 5
 	options.Host = targetip
 	options.Interface = "enp1s0"
 	options.InterfacesList = false
