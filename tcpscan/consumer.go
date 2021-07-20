@@ -52,16 +52,15 @@ func runTcpScan(targetip string) {
 }
 
 func parseOutput(conteudo []byte) []string{
-
-	results := []string{"a", "b", "c", "d"}
+	var results []string
 
 	linhas := strings.Split(string(conteudo), "\n")
 	log.Printf("=================")
 	for _,item := range linhas {
 		port := strings.Split(item, ":")
-
 		if len(port) > 1 {
-			log.Printf("%s",port[1])
+			log.Printf("Porta encontrada: %s",port[1])
+			results = append(results, port[1])
 		}
 	}
 	log.Printf("=================")
