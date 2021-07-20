@@ -31,13 +31,13 @@ func runTcpScan(targetip string) {
 	options.Timeout = 4
 	options.Retries = 2
 	options.Host = targetip
-	options.Interface = "enp1s0"    
-	options.InterfacesList = false    
-	//Ports
+	options.Interface = "enp1s0"
+	options.InterfacesList = false
+	//options.TopPorts = "21,22,25,80,81,82,123,135,143,110,443,445,8080,3306,3389"
 	options.TopPorts = "100"
 	options.Threads = 10
-	options.Nmap = true
-	options.NmapCLI = "nmap -sV -oX /tmp/nmap-output.xml --script=http-title,http-server-header,http-open-proxy,http-methods,http-headers,ssl-cert"
+	//options.Nmap = true
+	//options.NmapCLI = "nmap -sV -oX /tmp/nmap-output.xml --script=http-title,http-server-header,http-open-proxy,http-methods,http-headers,ssl-cert"
 
 	naabuRunner, err := runner.NewRunner(&options)
 	if err != nil {
