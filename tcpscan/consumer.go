@@ -129,9 +129,9 @@ func main() {
 		for d := range messageChannel {
 			log.Printf("New ipaddr to work with: %s", d.Body)
 
-			 runTcpScan(string(d.Body))
-			 resultado := checkScanResults()
-			 log.Printf(resultado)
+			runTcpScan(string(d.Body))
+			resultado := checkScanResults()
+			log.Printf(resultado)
 
 			if err := d.Ack(false); err != nil {
 				log.Printf("Error acknowledging message : %s", err)
