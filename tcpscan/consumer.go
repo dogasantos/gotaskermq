@@ -30,7 +30,8 @@ func runTcpScan(targetip string) {
 	options.Timeout = 4
 	options.Retries = 2
 	options.Host = targetip
-	options.Interface = "enp1s0"        
+	options.Interface = "enp1s0"    
+	options.InterfacesList = false    
 	//Ports
 	options.TopPorts = "100"
 	options.Threads = 10
