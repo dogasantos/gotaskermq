@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"io/ioutil"
+	"strings"
 
 	_ "github.com/projectdiscovery/fdmax/autofdmax"
 	"github.com/projectdiscovery/gologger"
@@ -51,26 +52,22 @@ func runTcpScan(targetip string) {
 
 }
 
+func parseOutput(conteudo []byte) []string {
+	var results []string
+	for _, item := range conteudo {
+		port := strings.Split(item, ":")[1]
+		results = append(results, string(port))
+	}
+	return results
+}
 
 func checkScanResults() []string{
-	var results []string
 	noutput := "/tmp/naabu-output.txt"
 
-	/*
-	_, err := os.Lstat(noutput)
-	handleError(err,"Can't stat %s",noutput)
-	*/
-	
 	fc, err := ioutil.ReadFile(noutput)
 	handleError(err,"Can't read %s",noutput)
-	
-	//os.Remove(noutput)
 
-	for _, item := range fc {
-		results = append(results, string(item))
-	}
-
-	return results
+	return parseOutput(fc)
 }
 
 
