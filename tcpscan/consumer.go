@@ -38,7 +38,7 @@ func runTcpScan(targetip string) {
 	options.TopPorts = "100"
 	options.Threads = 6
 	options.Nmap = false
-	//options.Output = "/tmp/naabu-output.txt"
+	options.Output = "/tmp/naabu-output.txt"
 	//options.NmapCLI = "nmap -sV -oX /tmp/nmap-results.xml --script=http-title,http-server-header,http-open-proxy,http-methods,http-headers,ssl-cert"
 
 	naabuRunner, err := runner.NewRunner(&options)
