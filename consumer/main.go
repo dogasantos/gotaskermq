@@ -1,14 +1,14 @@
 package main
 
 import (
-	"encoding/json"
 	"github.com/dogasantos/gotaskermq"
 	"github.com/streadway/amqp"
+	"encoding/json"
 	"log"
 	"os"
 )
 
-func handleError(err error, msg string) {
+func CatchError(err error, msg string) {
 	if err != nil {
 		log.Fatalf("%s: %s", msg, err)
 	}
@@ -17,19 +17,19 @@ func handleError(err error, msg string) {
 
 func main() {
 	conn, err := amqp.Dial(gotaskermq.Config.AMQPConnectionURL)
-	handleError(err, "Can't connect to AMQP")
+	CatchError(err, "Can't connect to AMQP")
 	defer conn.Close()
 
 	amqpChannel, err := conn.Channel()
-	handleError(err, "Can't create a amqpChannel")
+	CatchError(err, "Can't create a amqpChannel")
 
 	defer amqpChannel.Close()
 
 	queue, err := amqpChannel.QueueDeclare("add", true, false, false, false, nil)
-	handleError(err, "Could not declare `add` queue")
+	CatchError(err, "Could not declare `add` queue")
 
 	err = amqpChannel.Qos(1, 0, false)
-	handleError(err, "Could not configure QoS")
+	CatchError(err, "Could not configure QoS")
 
 	messageChannel, err := amqpChannel.Consume(
 		queue.Name,
@@ -40,7 +40,7 @@ func main() {
 		false,
 		nil,
 	)
-	handleError(err, "Could not register consumer")
+	CatchError(err, "Could not register consumer")
 
 	stopChan := make(chan bool)
 
