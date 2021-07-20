@@ -55,10 +55,9 @@ func runTcpScan(targetip string) {
 func parseOutput(conteudo []byte) []string {
 	var results []string
 	for _, item := range conteudo {
-		if len(string(item)) > 0 {
-			port := strings.Split(string(item), ":")[1]
-			results = append(results, string(port))
-		}
+		port := strings.Split(string(item), ":")
+		log.Printf(string(port))
+		results = append(results, string(port))
 	}
 	return results
 }
