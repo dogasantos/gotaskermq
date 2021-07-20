@@ -53,7 +53,7 @@ func runTcpScan(targetip string) {
 
 
 func checkScanResults(){
-	nmapxml := "/tmp/nmap-results.xml"
+	//nmapxml := "/tmp/nmap-results.xml"
 	noutput := "/tmp/naabu-output.txt"
 
 	//_, err := os.Lstat(nmapxml)
