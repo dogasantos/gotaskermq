@@ -18,7 +18,6 @@ func handleError(err error, msg string) {
 	}
 }
 
-
 func runTcpScan(targetip string) {
 
 	// Parse the command line flags and read config files
@@ -57,13 +56,12 @@ func checkNmapResults(){
 
 	if _, err := os.Stat(nmapxml); err == nil {
 		filecontent, err := ioutil.ReadFile(nmapxml)
-		handleError(err)
+		handleError(err,"Can't read /tmp/nmap-results.xml")
 		fileInfo, err := os.Lstat(nmapxml)
-		handleError(err)
+		handleError(err,"Can't stat /tmp/nmap-results.xml")
 		err := os.Remove(nmapxml) //toctou
-		handleError(err)
+		handleError(err,"Can't remove /tmp/nmap-results.xml")
 		log.Printf(filecontent)
-
 	  
 	  } else if os.IsNotExist(err) {
 		handleError("Nmap file does not exist")
