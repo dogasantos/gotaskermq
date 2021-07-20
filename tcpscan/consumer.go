@@ -67,7 +67,7 @@ func checkScanResults() []string{
 	for _, item := range fc {
 		results = append(results, string(item))
 	}
-	
+
 	return results
 }
 
@@ -143,7 +143,9 @@ func main() {
 			} else {
 				log.Printf("Acknowledged message!")
 				log.Printf("Found: ")
-				log.Printf(resultado)
+				for _, item := range resultado {
+					log.Printf("\t%s",item)
+				}
 
 			}
 
