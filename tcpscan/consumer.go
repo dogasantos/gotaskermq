@@ -29,7 +29,7 @@ func runTcpScan(targetip string) {
 	options.Retries = 3
 	options.WarmUpTime = 5
 	options.Host = targetip
-	options.Interface = "enp1s0"
+	//options.Interface = "enp1s0"
 	options.InterfacesList = false
 	options.TopPorts = "100"
 	options.Threads = 10
