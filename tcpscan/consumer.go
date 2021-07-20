@@ -54,12 +54,12 @@ func runTcpScan(targetip string) {
 func parseOutput(conteudo []byte) (string, []string) {
 	var results []string
 	var ipaddr string 
-	
+
 	linhas := strings.Split(string(conteudo), "\n")
 	for _,item := range linhas {
 		ipport := strings.Split(item, ":")
-		ipaddr = ipport[0]
 		if len(ipport) > 1 {
+			ipaddr = ipport[0]
 			//log.Printf("Porta encontrada: %s",port[1])
 			results = append(results, ipport[1])
 		}
