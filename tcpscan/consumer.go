@@ -49,7 +49,6 @@ func runTcpScan(targetip string) {
 	if err != nil {
 		gologger.Fatal().Msgf("Could not run enumeration: %s\n", err)
 	}
-
 }
 
 func parseOutput(conteudo []byte) []string {
