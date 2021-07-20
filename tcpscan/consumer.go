@@ -21,9 +21,9 @@ func handleError(err error, msg string) {
 
 func runTcpScan(targetip string) {
 	var options runner.Options
-	//options.Silent = true
-	options.Verbose = true  
-	options.Debug = true
+	options.Silent = true
+	options.Verbose = false  // mudar
+	options.Debug = false // mudar
 	options.Ping = false
 	options.EnableProgressBar = false
 	options.ScanType = "s"
@@ -59,7 +59,7 @@ func parseOutput(conteudo []byte) []string{
 	for _,item := range linhas {
 		port := strings.Split(item, ":")
 		if len(port) > 1 {
-			log.Printf("Porta encontrada: %s",port[1])
+			//log.Printf("Porta encontrada: %s",port[1])
 			results = append(results, port[1])
 		}
 	}
