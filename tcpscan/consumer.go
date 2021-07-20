@@ -65,7 +65,7 @@ func checkScanResults() []string{
 	noutput := "/tmp/naabu-output.txt"
 
 	fc, err := ioutil.ReadFile(noutput)
-	handleError(err,"Can't read %s",noutput)
+	handleError(err,"Can't read /tmp/naabu-output.txt")
 
 	return parseOutput(fc)
 }
