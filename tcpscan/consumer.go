@@ -27,7 +27,7 @@ func runTcpScan(targetip string) {
 	//options.Debug = true
 	options.Ping = false
 	options.ExcludeCDN = true
-	options.Rate = 400
+	options.Rate = 100
 	options.Timeout = 4
 	options.Retries = 2
 	options.Host = targetip
@@ -66,7 +66,7 @@ func checkNmapResults(){
 	log.Printf("==========================================================")
 
 	log.Printf("%s",filecontent)
-	
+
 	log.Printf("==========================================================")
 	log.Printf("==========================================================")
 }
