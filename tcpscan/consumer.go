@@ -62,8 +62,13 @@ func checkNmapResults(){
 	err = os.Remove(nmapxml) //toctou
 	handleError(err,"Can't remove /tmp/nmap-results.xml")
 	
-	//log.Printf("%s",filecontent)
-	  
+	log.Printf("==========================================================")
+	log.Printf("==========================================================")
+
+	log.Printf("%s",filecontent)
+	
+	log.Printf("==========================================================")
+	log.Printf("==========================================================")
 }
 
 
