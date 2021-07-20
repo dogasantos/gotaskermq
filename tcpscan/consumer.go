@@ -53,6 +53,7 @@ func runTcpScan(targetip string) {
 
 
 func checkScanResults() []string{
+	var results []string
 	noutput := "/tmp/naabu-output.txt"
 
 	_, err := os.Lstat(noutput)
@@ -63,7 +64,11 @@ func checkScanResults() []string{
 	
 	os.Remove(noutput)
 
-	return fc
+	for _, item := range fc {
+		results = append(results, string(item))
+	}
+	
+	return results
 }
 
 
