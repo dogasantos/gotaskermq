@@ -3,16 +3,37 @@ package main
 import (
 	"github.com/streadway/amqp"
 	"log"
+	"math/rand"
+	"time"
+	"flag"
 	"os"
+	"fmt"
 )
+
+type Options struct {
+	Domain string
+}
 
 func handleError(err error, msg string) {
 	if err != nil {
 		log.Fatalf("%s: %s", msg, err)
 	}
+
 }
 
 func main() {
+	options := Options{}
+	flag.StringVar(&options.Domain, 		"d", "", "target domain")
+	flag.Parse()
+	flag.Usage = func() {
+		fmt.Printf("Usage of %s:\n", os.Args[0])
+		flag.PrintDefaults()
+	}
+	if flag.NFlag() == 0 {
+		flag.Usage()
+		os.Exit(1)
+	}
+
 	conn, err := amqp.Dial("amqp://rabbitmq:rabbitmq@localhost:5672/")
 	handleError(err, "Can't connect to AMQP")
 	defer conn.Close()
@@ -20,6 +41,7 @@ func main() {
 	// cria channel
 	amqpChannel, err := conn.Channel()
 	handleError(err, "Can't create a amqpChannel")
+	defer amqpChannel.Close()
 
 	exchangeName 	:= "domain"
 	bindingKey   	:= "search.subfinder.*"
@@ -35,8 +57,6 @@ func main() {
 		false,
 		nil,
 	)
-
-	defer amqpChannel.Close()
 	
 	// cria Queue
 	queue, err := amqpChannel.QueueDeclare(queueName, true, false, false, false, nil)
@@ -51,39 +71,16 @@ func main() {
 		nil,
 	)
 
+	rand.Seed(time.Now().UnixNano())
 
-	err = amqpChannel.Qos(1, 0, false)
-	handleError(err, "Could not configure QoS")
+	err = amqpChannel.Publish("", queue.Name, false, false, amqp.Publishing{
+		DeliveryMode: amqp.Persistent,
+		ContentType:  "text/plain",
+		Body:         []byte(options.Domain),
+	})
 
-	// consome queue
-	messageChannel, err := amqpChannel.Consume(
-		queue.Name,
-		"",
-		false,
-		false,
-		false,
-		false,
-		nil,
-	)
-	handleError(err, "Could not register consumer")
+	if err != nil {
+		log.Fatalf("Error publishing message: %s", err)
+	}
 
-	stopChan := make(chan bool)
-
-	go func() {
-		log.Printf("Consumer ready, PID: %d", os.Getpid())
-		for d := range messageChannel {
-			log.Printf("New domain to work with: %s", d.Body)
-
-			
-			if err := d.Ack(false); err != nil {
-				log.Printf("Error acknowledging message : %s", err)
-			} else {
-				log.Printf("Acknowledged message")
-			}
-
-		}
-	}()
-
-	// Stop for program termination
-	<-stopChan
 }
