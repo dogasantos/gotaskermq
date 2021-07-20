@@ -53,17 +53,12 @@ func runTcpScan(targetip string) {
 
 func parseOutput(conteudo []byte) []string {
 	var results []string
-	for _, item := range conteudo {
-		log.Printf(string(item))
-		log.Printf("%s", strings.Split(string(item), ":"))
+	results = string(conteudo)
+	fmt.Printf("=================")
+	fmt.Printf(results)
+	fmt.Printf("=================")
 
-		/*
-		port := strings.Split(string(item), ":")
-		log.Printf("%s",len(port))
-		log.Printf(string(port[0]))
-		results = append(results, string(port[0]))
-		*/
-	}
+
 	return results
 }
 
