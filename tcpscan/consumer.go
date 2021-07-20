@@ -53,8 +53,7 @@ func runTcpScan(targetip string) {
 
 func parseOutput(conteudo []byte) []string{
 
-	var results []string
-	results = {'a','b'}
+	results := []string{"a", "b", "c", "d"}
 
 	results := string(conteudo)
 	log.Printf("=================")
