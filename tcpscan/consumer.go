@@ -24,7 +24,7 @@ func runTcpScan(targetip string) {
 	options.Verbose = true  
 	options.Debug = true
 	options.Ping = false
-	options.EnableProgressBar = true
+	options.EnableProgressBar = false
 	options.ScanType = "s"
 	options.ExcludeCDN = true
 	options.Rate = 200
