@@ -51,22 +51,23 @@ func runTcpScan(targetip string) {
 	}
 }
 
-func parseOutput(conteudo []byte) []string{
+func parseOutput(conteudo []byte) (string, []string) {
 	var results []string
 
 	linhas := strings.Split(string(conteudo), "\n")
 	for _,item := range linhas {
-		port := strings.Split(item, ":")
-		if len(port) > 1 {
+		ipport := strings.Split(item, ":")
+		ipaddr := ipport[0]
+		if len(ipport) > 1 {
 			//log.Printf("Porta encontrada: %s",port[1])
-			results = append(results, port[1])
+			results = append(results, ipport[1])
 		}
 	}
 
-	return results
+	return ipaddr,results
 }
 
-func checkScanResults() []string{
+func checkScanResults() (string, []string) {
 	noutput := "/tmp/naabu-output.txt"
 
 	fc, err := ioutil.ReadFile(noutput)
@@ -139,21 +140,14 @@ func main() {
 			log.Printf("New ipaddr to work with: %s", d.Body)
 
 			runTcpScan(string(d.Body))
-			resultado := checkScanResults()
+			ipaddr,portas := checkScanResults()
 			
 
 			if err := d.Ack(false); err != nil {
 				log.Printf("Error acknowledging message : %s", err)
 			} else {
 				log.Printf("Acknowledged message!")
-				log.Printf("Found: ")
-				log.Printf("%s",resultado)
-				/*
-				for _, item := range resultado {
-					log.Printf("\t%s",item)
-				}
-				*/
-
+				log.Printf("Portas abertas no ip %s: %s", ipaddr, portas)
 			}
 
 		}
