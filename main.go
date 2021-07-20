@@ -1,4 +1,4 @@
-package gotaskermq
+package main
 
 type Configuration struct {
 	AMQPConnectionURL string
