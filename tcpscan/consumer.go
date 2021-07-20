@@ -27,7 +27,7 @@ func runTcpScan(targetip string) {
 	//options.Debug = true
 	options.Ping = false
 	options.ExcludeCDN = true
-	//options.Rate = 200
+	options.Rate = 100
 	options.Timeout = 6
 	options.Retries = 2
 	options.WarmUpTime = 4
