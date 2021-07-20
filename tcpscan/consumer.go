@@ -51,9 +51,11 @@ func runTcpScan(targetip string) {
 	}
 }
 
-func parseOutput(conteudo []byte) {
+func parseOutput(conteudo []byte) []string{
 
-	
+	var results []string
+	results = {'a','b'}
+
 	results := string(conteudo)
 	log.Printf("=================")
 	log.Printf(results)
@@ -64,9 +66,8 @@ func parseOutput(conteudo []byte) {
 	log.Printf("%s",first)
 	log.Printf("=================")
 
-
-
 	return results
+
 }
 
 func checkScanResults() []string{
