@@ -28,7 +28,7 @@ func runTcpScan(targetip string) {
 	options.Ping = false
 	options.ExcludeCDN = true
 	options.Rate = 100
-	options.Timeout = 4
+	options.Timeout = 6
 	options.Retries = 2
 	options.Host = targetip
 	options.Interface = "enp1s0"
