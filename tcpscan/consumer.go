@@ -56,7 +56,8 @@ func parseOutput(conteudo []byte) []string {
 	var results []string
 	for _, item := range conteudo {
 		port := strings.Split(string(item), ":")
-		log.Printf(string(port))
+		log.Printf(len(port))
+		log.Printf(string(port[0]))
 		results = append(results, string(port))
 	}
 	return results
