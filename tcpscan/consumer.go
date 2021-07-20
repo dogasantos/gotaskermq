@@ -23,8 +23,8 @@ func runTcpScan(targetip string) {
 	// Parse the command line flags and read config files
 	//options := runner.ParseOptions()
 	var options runner.Options
-	options.Silent = false
-	options.Debug = true
+	options.Silent = true
+	//options.Debug = true
 	options.Ping = false
 	options.ExcludeCDN = true
 	options.Rate = 400
@@ -62,7 +62,7 @@ func checkNmapResults(){
 	err = os.Remove(nmapxml) //toctou
 	handleError(err,"Can't remove /tmp/nmap-results.xml")
 	
-	log.Printf("%s",filecontent)
+	//log.Printf("%s",filecontent)
 	  
 }
 
