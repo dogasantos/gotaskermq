@@ -28,7 +28,7 @@ func runTcpScan(targetip string) {
 	options.EnableProgressBar = false
 	options.ScanType = "s"
 	options.ExcludeCDN = true
-	options.Rate = 200
+	options.Rate = 400
 	options.Timeout = 8
 	options.Retries = 3
 	options.WarmUpTime = 5
@@ -55,7 +55,6 @@ func parseOutput(conteudo []byte) []string{
 	var results []string
 
 	linhas := strings.Split(string(conteudo), "\n")
-	log.Printf("=================")
 	for _,item := range linhas {
 		port := strings.Split(item, ":")
 		if len(port) > 1 {
@@ -63,10 +62,8 @@ func parseOutput(conteudo []byte) []string{
 			results = append(results, port[1])
 		}
 	}
-	log.Printf("=================")
 
 	return results
-
 }
 
 func checkScanResults() []string{
