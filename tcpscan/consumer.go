@@ -72,7 +72,7 @@ func checkScanResults(){
 
 	log.Printf("==========================================================")
 
-	_, err = os.Lstat(noutput)
+	_, err := os.Lstat(noutput)
 	handleError(err,"Can't stat /tmp/naabu-output.txt")
 	
 	fc, err := ioutil.ReadFile(noutput)
