@@ -53,18 +53,17 @@ func runTcpScan(targetip string) {
 func checkNmapResults(){
 	nmapxml := "/tmp/nmap-results.xml"
 
-	if _, err1 := os.Stat(nmapxml); err == nil {
-		filecontent, err := ioutil.ReadFile(nmapxml)
-		handleError(err,"Can't read /tmp/nmap-results.xml")
-		fileInfo, err := os.Lstat(nmapxml)
-		handleError(err,"Can't stat /tmp/nmap-results.xml")
-		err = os.Remove(nmapxml) //toctou
-		handleError(err,"Can't remove /tmp/nmap-results.xml")
-		log.Printf("%s",filecontent)
-	  
-	} else if os.IsNotExist(err1) {
-		handleError(err,"Nmap file does not exist")
-	}
+	fileInfo, err := os.Lstat(nmapxml)
+	handleError(err,"Can't stat /tmp/nmap-results.xml")
+	
+	filecontent, err := ioutil.ReadFile(nmapxml)
+	handleError(err,"Can't read /tmp/nmap-results.xml")
+	
+	err = os.Remove(nmapxml) //toctou
+	handleError(err,"Can't remove /tmp/nmap-results.xml")
+	
+	log.Printf("%s",filecontent)
+
 	  
 }
 
