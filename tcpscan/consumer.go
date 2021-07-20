@@ -23,16 +23,16 @@ func runTcpScan(targetip string) {
 	//options.Silent = true
 	options.Debug = true
 	options.Ping = false
-	options.ExcludeCDN = true
+	//options.ExcludeCDN = true
 	options.Rate = 200
-	options.Timeout = 6
-	options.Retries = 3
-	options.WarmUpTime = 5
+	//options.Timeout = 6
+	//options.Retries = 3
+	//options.WarmUpTime = 5
 	options.Host = targetip
 	//options.Interface = "enp1s0"
-	options.InterfacesList = false
+	//options.InterfacesList = false
 	options.TopPorts = "100"
-	options.Threads = 10
+	options.Threads = 6
 	options.Nmap = true
 	//options.Output = "/tmp/naabu-output.txt"
 	options.NmapCLI = "nmap -sV -oX /tmp/nmap-output.xml --script=http-title,http-server-header,http-open-proxy,http-methods,http-headers,ssl-cert"
