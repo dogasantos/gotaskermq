@@ -27,13 +27,14 @@ func runTcpScan(targetip string) {
 	//options.Debug = true
 	options.Ping = false
 	options.ExcludeCDN = true
-	options.Rate = 100
+	options.Rate = 200
 	options.Timeout = 6
 	options.Retries = 2
+	options.WarmUpTime = 4
 	options.Host = targetip
 	options.Interface = "enp1s0"
 	options.InterfacesList = false
-	options.TopPorts = "21,22,25,80,81,82,123,135,143,110,443,445,8080,3306,3389"
+	//options.Ports = "21,22,25,80,81,82,123,135,143,110,443,445,8080,3306,3389"
 	options.TopPorts = "100"
 	options.Threads = 10
 	options.Nmap = true
