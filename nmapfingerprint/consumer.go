@@ -66,12 +66,15 @@ func runNmapFingerprint(target string, ports string) string {
 
     fmt.Printf("Nmap done: %d hosts up scanned in %3f seconds\n", len(result.Hosts), result.Stats.Finished.Elapsed)
 
-	rawXML := result.ToReader()
+
+	rawXML := new(strings.Builder)
+	_, err := io.Copy(rawXML, result.ToReader())
+	
 	fmt.Printf("======XML:========================\n")
-	fmt.Printf("%s",string( rawXML ))
+	fmt.Printf("%s",rawXML.String())
 
 	fmt.Printf("==================================\n")
-	return string(rawXML )
+	return string( rawXML.String() )
 }
 
 
