@@ -6,6 +6,8 @@ import (
     "fmt"
     "log"
     "time"
+	"strings"
+	"os"
 
 	"github.com/Ullaakut/nmap/v2"
 )
@@ -30,7 +32,7 @@ func runNmapFingerprint(target string, ports string) {
         nmap.WithServiceInfo(),
 		nmap.WithVersionIntensity(6),
 		nmap.WithScripts("http-title,http-server-header,http-open-proxy,http-methods,http-headers,ssl-cert"),
-		nmap.WithTimingTemplate(TimingAggressive),
+		nmap.WithTimingTemplate(4),
 		nmap.WithPorts(ports),
         nmap.WithContext(ctx),
     )
