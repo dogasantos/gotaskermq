@@ -23,9 +23,7 @@ func runNmapFingerprint(target string, ports string) string {
     ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
     defer cancel()
 
-    // Equivalent to `/usr/local/bin/nmap -p 80,443,843 google.com facebook.com youtube.com`,
-    // with a 5 minute timeout.
-
+	// CONFIGURE SCAN
     scanner, err := nmap.NewScanner(
         nmap.WithTargets(target),
         nmap.WithSkipHostDiscovery(),
@@ -40,6 +38,7 @@ func runNmapFingerprint(target string, ports string) string {
         log.Fatalf("unable to create nmap scanner: %v", err)
     }
 
+	// RUN NMAP SCAN
     result, warnings, err := scanner.Run()
     if err != nil {
         log.Fatalf("unable to run nmap scan: %v", err)
@@ -65,10 +64,10 @@ func runNmapFingerprint(target string, ports string) string {
 
     fmt.Printf("Nmap done: %d hosts up scanned in %3f seconds\n", len(result.Hosts), result.Stats.Finished.Elapsed)
 	fmt.Printf("======XML:========================")
-	fmt.Printf("%s",string(&result.rawXML))
+	fmt.Printf("%s",string(result.XMLOutputVersion ))
 
 	fmt.Printf("==================================")
-	return string(&result.rawXML)
+	return string(result.XMLOutputVersion )
 }
 
 
