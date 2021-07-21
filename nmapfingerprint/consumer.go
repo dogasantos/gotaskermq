@@ -59,7 +59,7 @@ func runNmapFingerprint(target string, ports string) string {
 
         for _, port := range host.Ports {
             //fmt.Printf("\tPort %d/%s %s %s\n", port.ID, port.Protocol, port.State, port.Service.Name)
-			fmt.Printf("\t%s:%d %s %s %s\n",host.Addresses[0], port.ID, port.Protocol, port.Owner, port.Service)
+			fmt.Printf("\t%s:%d %s %s %s \n\t\t%s\n",host.Addresses[0], port.ID, port.Service.Tunnel, port.Service.Product, port.Service.Version,port.Service.CPEs )
 
         }
     }
