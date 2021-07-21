@@ -23,6 +23,7 @@ func runNmapFingerprint(target string, ports string) string {
     ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
     defer cancel()
 
+	fmt.Printf("Prepare target scan on %s at ports %s\n", target,ports)
 	// CONFIGURE SCAN
     scanner, err := nmap.NewScanner(
         nmap.WithTargets(target),
@@ -63,11 +64,11 @@ func runNmapFingerprint(target string, ports string) string {
     }
 
     fmt.Printf("Nmap done: %d hosts up scanned in %3f seconds\n", len(result.Hosts), result.Stats.Finished.Elapsed)
-	fmt.Printf("======XML:========================")
-	fmt.Printf("%s",string(result.XMLOutputVersion ))
+	fmt.Printf("======XML:========================\n")
+	fmt.Printf("%s",string(result.rawXML ))
 
-	fmt.Printf("==================================")
-	return string(result.XMLOutputVersion )
+	fmt.Printf("==================================\n")
+	return string(result.rawXML )
 }
 
 
