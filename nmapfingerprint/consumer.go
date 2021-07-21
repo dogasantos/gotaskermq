@@ -59,9 +59,9 @@ func runNmapFingerprint(target string, ports string) string {
         for _, port := range host.Ports {
             //fmt.Printf("\tPort %d/%s %s %s\n", port.ID, port.Protocol, port.State, port.Service.Name)
 			if port.Service.Tunnel == "ssl" {
-				fmt.Printf("\t%s:%d (name:%s Tunnel:%s Product:%s Version:%s \nFP: %s\n\t\tcpe:%s\n",host.Addresses[0], port.ID, port.Service.Name, port.Service.Tunnel, port.Service.Product, port.Service.Version, port.Service.servicefp, port.Service.CPEs )
+				fmt.Printf("\t%s:%d (name:%s Tunnel:%s Product:%s Version:%s \nFP: %s\n\t\tcpe:%s\n",host.Addresses[0], port.ID, port.Service.Name, port.Service.Tunnel, port.Service.Product, port.Service.Version, port.Service.ServiceFP, port.Service.CPEs )
 			} else {
-				fmt.Printf("\t%s:%d (name:%s Product:%s Version:%s \nFP: %s\n\t\tcpe:%s\n",host.Addresses[0], port.ID, port.Service.Name, port.Service.Product, port.Service.Version, port.Service.servicefp , port.Service.CPEs )
+				fmt.Printf("\t%s:%d (name:%s Product:%s Version:%s \nFP: %s\n\t\tcpe:%s\n",host.Addresses[0], port.ID, port.Service.Name, port.Service.Product, port.Service.Version, port.Service.ServiceFP , port.Service.CPEs )
 			}
         }
     }
