@@ -44,7 +44,7 @@ func main() {
 	defer amqpChannel.Close()
 
 	exchangeName 	:= "ip"
-	bindingKey   	:= "tcp.scan.*"
+	bindingKey   	:= "tcp.nmap.*"
 	queueName 		:= "iptarget"
 
 	// Create the exchange if it doesn't already exist.

@@ -88,8 +88,6 @@ func parseOutput(conteudo []byte) (string, []string) {
 }
 
 
-
-
 func main() {
 	conn, err := amqp.Dial("amqp://rabbitmq:rabbitmq@localhost:5672/")
 	handleError(err, "Can't connect to AMQP")
@@ -100,7 +98,7 @@ func main() {
 	handleError(err, "Can't create a amqpChannel")
 
 	exchangeName 	:= "ip"
-	bindingKey   	:= "tcp.scan.*"
+	bindingKey   	:= "tcp.nmap.*"
 	queueName 		:= "iptarget"
 
 	// Create the exchange if it doesn't already exist.
