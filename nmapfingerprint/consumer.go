@@ -151,7 +151,8 @@ func main() {
 		for d := range messageChannel {
 			log.Printf("New ipaddr to work with: %s", d.Body)
 
-			resultado := runNmapFingerprint(string(d.Body))
+			dados := strings.Split(string(d.Body),":")
+			resultado := runNmapFingerprint(dados[0],dados[1])
 			//ipaddr,portas := parseOutput()
 			log.Printf("%s",len(string(resultado)))
 
