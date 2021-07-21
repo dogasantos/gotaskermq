@@ -29,9 +29,9 @@ func runNmapFingerprint(target string, ports string) string {
         nmap.WithTargets(target),
         nmap.WithSkipHostDiscovery(),
         nmap.WithServiceInfo(),
-		nmap.WithVersionIntensity(6),
+		nmap.WithVersionIntensity(9),
 		nmap.WithScripts("http-title,http-server-header,http-open-proxy,http-methods,http-headers,ssl-cert"),
-		nmap.WithTimingTemplate(4),
+		nmap.WithTimingTemplate(5),
 		nmap.WithPorts(ports),
         nmap.WithContext(ctx),
     )
@@ -56,10 +56,9 @@ func runNmapFingerprint(target string, ports string) string {
             continue
         }
 
-
         for _, port := range host.Ports {
             //fmt.Printf("\tPort %d/%s %s %s\n", port.ID, port.Protocol, port.State, port.Service.Name)
-			fmt.Printf("\t%s:%d %s %s %s \n\t\t%s\n",host.Addresses[0], port.ID, port.Service.Tunnel, port.Service.Product, port.Service.Version, port.Service.CPEs )
+			fmt.Printf("\t%s:%d (name:%s Tunnel:%s Product:%s Version:%s \n\t\tcpe:%s\n",host.Addresses[0], port.ID, port.Service.Name, port.Service.Tunnel, port.Service.Product, port.Service.Version, port.Service.CPEs )
 
         }
     }
