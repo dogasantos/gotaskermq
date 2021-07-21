@@ -148,7 +148,8 @@ func main() {
 				log.Printf("Error acknowledging message : %s", err)
 			} else {
 				log.Printf("Acknowledged message!")
-				log.Printf("Portas abertas no ip %s: %s", ipaddr, portas)
+				ports := strings.Join(portas, ",")
+				log.Printf("Portas abertas no ip %s: %s", ipaddr, ports)
 			}
 
 		}
