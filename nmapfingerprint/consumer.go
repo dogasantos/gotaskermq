@@ -59,17 +59,19 @@ func runNmapFingerprint(target string, ports string) string {
 
         for _, port := range host.Ports {
             //fmt.Printf("\tPort %d/%s %s %s\n", port.ID, port.Protocol, port.State, port.Service.Name)
-			fmt.Printf("\t%s:%d %s %s %s \n\t\t%s\n",host.Addresses[0], port.ID, port.Service.Tunnel, port.Service.Product, port.Service.Version,port.Service.CPEs )
+			fmt.Printf("\t%s:%d %s %s %s \n\t\t%s\n",host.Addresses[0], port.ID, port.Service.Tunnel, port.Service.Product, port.Service.Version, port.Service.CPEs )
 
         }
     }
 
     fmt.Printf("Nmap done: %d hosts up scanned in %3f seconds\n", len(result.Hosts), result.Stats.Finished.Elapsed)
+
+	rawXML := result.ToReader()
 	fmt.Printf("======XML:========================\n")
-	fmt.Printf("%s",string(result.rawXML ))
+	fmt.Printf("%s",string( rawXML ))
 
 	fmt.Printf("==================================\n")
-	return string(result.rawXML )
+	return string(rawXML )
 }
 
 
