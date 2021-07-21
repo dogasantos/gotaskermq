@@ -8,7 +8,7 @@ import (
     "time"
 	"strings"
 	"os"
-
+	"io"
 	"github.com/Ullaakut/nmap/v2"
 )
 
@@ -68,7 +68,7 @@ func runNmapFingerprint(target string, ports string) string {
 
 
 	rawXML := new(strings.Builder)
-	_, err := io.Copy(rawXML, result.ToReader())
+	io.Copy(rawXML, result.ToReader())
 	
 	fmt.Printf("======XML:========================\n")
 	fmt.Printf("%s",rawXML.String())
