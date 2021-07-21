@@ -1,2 +1,2 @@
-#go mod init tcpscan
+go mod init tcpscan
 go mod tidy

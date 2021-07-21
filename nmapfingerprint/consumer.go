@@ -32,7 +32,7 @@ func runNmapFingerprint(target string, ports string) {
 		nmap.WithScripts("http-title,http-server-header,http-open-proxy,http-methods,http-headers,ssl-cert"),
 		nmap.WithTimingTemplate(TimingAggressive),
 		nmap.WithPorts(ports),
-        nmap.WithContext(ctx)
+        nmap.WithContext(ctx),
     )
     if err != nil {
         log.Fatalf("unable to create nmap scanner: %v", err)
@@ -150,15 +150,15 @@ func main() {
 		for d := range messageChannel {
 			log.Printf("New ipaddr to work with: %s", d.Body)
 
-			_ :=runNmapFingerprint(string(d.Body))
+			resultado := runNmapFingerprint(string(d.Body))
 			//ipaddr,portas := parseOutput()
-			
+			log.Printf("%s",len(string(resultado)))
 
 			if err := d.Ack(false); err != nil {
 				log.Printf("Error acknowledging message : %s", err)
 			} else {
 				log.Printf("Acknowledged message!")
-				log.Printf("Portas abertas no ip %s: %s", ipaddr, portas)
+				//log.Printf("Portas abertas no ip %s: %s", ipaddr, portas)
 			}
 
 		}
