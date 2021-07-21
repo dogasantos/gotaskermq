@@ -28,12 +28,11 @@ func runNmapFingerprint(target string, ports string) {
         nmap.WithTargets(target),
         nmap.WithSkipHostDiscovery(),
         nmap.WithServiceInfo(),
-        nmap.WithServiceInfo(),
 		nmap.WithVersionIntensity(6),
 		nmap.WithScripts("http-title,http-server-header,http-open-proxy,http-methods,http-headers,ssl-cert"),
-		//nmap.WithTimingTemplate(TimingAggressive)
+		nmap.WithTimingTemplate(TimingAggressive),
 		nmap.WithPorts(ports),
-        nmap.WithContext(ctx),
+        nmap.WithContext(ctx)
     )
     if err != nil {
         log.Fatalf("unable to create nmap scanner: %v", err)
@@ -47,6 +46,7 @@ func runNmapFingerprint(target string, ports string) {
     if warnings != nil {
         log.Printf("Warnings: \n %v", warnings)
     }
+
 
     // Use the results to print an example output
     for _, host := range result.Hosts {
@@ -62,6 +62,11 @@ func runNmapFingerprint(target string, ports string) {
     }
 
     fmt.Printf("Nmap done: %d hosts up scanned in %3f seconds\n", len(result.Hosts), result.Stats.Finished.Elapsed)
+	fmt.Printf("======XML:========================")
+	fmt.Printf("%s",string(result))
+
+	fmt.Printf("==================================")
+	return result
 }
 
 
@@ -147,8 +152,8 @@ func main() {
 		for d := range messageChannel {
 			log.Printf("New ipaddr to work with: %s", d.Body)
 
-			runTcpScan(string(d.Body))
-			ipaddr,portas := checkScanResults()
+			_ :=runNmapFingerprint(string(d.Body))
+			//ipaddr,portas := parseOutput()
 			
 
 			if err := d.Ack(false); err != nil {
