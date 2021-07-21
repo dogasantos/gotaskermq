@@ -68,11 +68,11 @@ func runNmapFingerprint(target string, ports string) string {
 
 	rawXML := new(strings.Builder)
 	io.Copy(rawXML, result.ToReader())
-	
+	/*
 	fmt.Printf("======XML:========================\n")
 	fmt.Printf("%s",rawXML.String())
-
 	fmt.Printf("==================================\n")
+	*/
 	return string( rawXML.String() )
 }
 
